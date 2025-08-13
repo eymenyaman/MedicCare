@@ -1,3 +1,6 @@
+using DAL.Concrete.Context;
+using Microsoft.EntityFrameworkCore;
+
 namespace WebUı
 {
     public class Program
@@ -8,6 +11,14 @@ namespace WebUı
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("EfCoreConnection"),
+                    b => b.MigrationsAssembly("DAL")  // migration’ları DAL’a alır
+                );
+            });
 
             var app = builder.Build();
 
