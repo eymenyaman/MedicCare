@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace DAL.Concrete.EfCore
 {
-    public class ProfileDal
+    public class EfCoreProfileDal
     {
         private readonly DataContext _Context;
-        public ProfileDal(DataContext context)
+        public EfCoreProfileDal(DataContext context)
         {
             _Context = context;
         }

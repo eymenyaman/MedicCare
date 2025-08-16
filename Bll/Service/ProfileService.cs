@@ -10,9 +10,9 @@ namespace BLL.Service
 {
     public class ProfileService
     {
-        private readonly ProfileDal profileDal;
+        private readonly EfCoreProfileDal profileDal;
 
-        public ProfileService(ProfileDal profile)
+        public ProfileService(EfCoreProfileDal profile)
         {
             profileDal = profile;
         }

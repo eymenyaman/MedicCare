@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Concrete.Context
 {
-    public class DataContext : DbContext //MYSQL
+    public class DataContext : DbContext //MSSQL
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
