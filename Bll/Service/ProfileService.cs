@@ -1,4 +1,6 @@
-﻿using DAL.Concrete.EfCore;
+﻿using BLL.Abstract;
+using DAL.Abstract;
+using DAL.Concrete.EfCore;
 using Entity;
 using System;
 using System.Collections.Generic;
@@ -8,19 +10,31 @@ using System.Threading.Tasks;
 
 namespace BLL.Service
 {
-    public class ProfileService
+    public class ProfileService : IProfileService
     {
-        private readonly EfCoreProfileDal profileDal;
-
-        public ProfileService(EfCoreProfileDal profile)
+        private readonly IProfileDal _profildal;
+        public ProfileService(IProfileDal profileDal)
         {
-            profileDal = profile;
+            _profildal = profileDal;
         }
-        public Profile GetProfile()
+        public async Task CreateAsync(Profile entity)
         {
-            return profileDal.GetProfile();
+            await _profildal.CreateAsync(entity);
         }
 
+        public async Task DeleteAsync(int Id)
+        {
+            await _profildal.DeleteAsync(Id);
+        }
 
+        public async Task<Profile> GetAsync()
+        {
+            return await _profildal.GetAsync();
+        }
+
+        public async Task UpdateAsync()
+        {
+            await _profildal.UpdateAsync();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DAL.Concrete.Context;
+﻿using DAL.Abstract;
+using DAL.Concrete.Context;
 using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,18 +10,15 @@ using System.Threading.Tasks;
 
 namespace DAL.Concrete.EfCore
 {
-    public class EfCoreProfileDal
+    public class EfCoreProfileDal:EfCoreGenericRepository<Profile,DataContext>,IProfileDal
     {
         private readonly DataContext _Context;
-        public EfCoreProfileDal(DataContext context)
+        public EfCoreProfileDal(DataContext context) : base(context)
         {
             _Context = context;
         }
 
-        public Profile GetProfile()
-        {
-            return _Context.Profiles.FirstOrDefault();
-        }
+        
 
     }
 }
