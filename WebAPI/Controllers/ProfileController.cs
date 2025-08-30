@@ -1,4 +1,5 @@
 ﻿using BLL.Abstract;
+using BLL.Service;
 using Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,6 @@ namespace WebAPI.Controllers
         {
             return await _profileService.GetAsync();
         }
-
+     
     }
 }

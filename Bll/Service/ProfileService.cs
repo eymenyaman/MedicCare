@@ -27,6 +27,11 @@ namespace BLL.Service
             await _profildal.DeleteAsync(Id);
         }
 
+        public Task<List<Profile>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Profile> GetAsync()
         {
             return await _profildal.GetAsync();

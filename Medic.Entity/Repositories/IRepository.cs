@@ -13,5 +13,7 @@ namespace Entity.Repositories
         Task UpdateAsync();
         Task DeleteAsync(int Id);
         Task<T> GetAsync();
+        Task<List<T>> GetAllAsync();
+
     }
 }

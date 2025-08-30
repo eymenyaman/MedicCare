@@ -14,24 +14,27 @@ namespace WebAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Add services to the container.  
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle  
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("EfCoreConnection"));
             });
+            //Servisler  
             builder.Services.AddScoped<IProfileService, ProfileService>();
             builder.Services.AddScoped<IProfileDal, EfCoreProfileDal>();
-            
-
+            builder.Services.AddScoped<IAboutService, AboutService>();
+            builder.Services.AddScoped<IAboutDal, EfCoreAboutDal>();
+            builder.Services.AddScoped<IExperiencesService, ExperiencesService>();
+            builder.Services.AddScoped<IExperiencesDal, EfCoreExperiencesDal>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Configure the HTTP request pipeline.  
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -41,7 +44,6 @@ namespace WebAPI
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

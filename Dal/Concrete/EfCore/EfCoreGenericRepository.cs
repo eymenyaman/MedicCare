@@ -1,4 +1,5 @@
 ﻿using DAL.Concrete.Context;
+using Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,9 @@ namespace DAL.Concrete.EfCore
         {
             return await _context.Set<T>().FirstOrDefaultAsync();
         }
-
+        public async Task<List<T>> GetAllAsync()
+        {
+            return await _context.Set<T>().ToListAsync();
+        }
     }
 }
