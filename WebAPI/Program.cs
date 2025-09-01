@@ -31,7 +31,10 @@ namespace WebAPI
             builder.Services.AddScoped<IAboutDal, EfCoreAboutDal>();
             builder.Services.AddScoped<IExperiencesService, ExperiencesService>();
             builder.Services.AddScoped<IExperiencesDal, EfCoreExperiencesDal>();
-
+            builder.Services.AddScoped<ITestimonialsService, TestimonialsService>();
+            builder.Services.AddScoped<ITestimonialsDal, EfCoreTestimonialsDal>();
+            builder.Services.AddScoped<IContactService, ContactService>();
+            builder.Services.AddScoped<IContactDal, EfCoreContactDal>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.  

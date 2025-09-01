@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Abstract
 {
-    public interface IAboutService : IRepository<About>
+    public interface ITestimonialsService : IRepository<Testimonials>
     {
     }
 }

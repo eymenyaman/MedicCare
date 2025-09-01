@@ -2,15 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
-namespace WebUI.ViewComponents.Reviews
+namespace WebUI.ViewComponents.Contact
 {
-    public class _SelectReviewsViewComponentPartial : ViewComponent
+    public class _SelectContactViewComponentPartial:ViewComponent
     {
         private readonly HttpClient client = new HttpClient();
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var response = await client.GetAsync("https://localhost:7006/api/Testimonial");
+            var response = await client.GetAsync("https://localhost:7006/api/Contact");
             var model = await response.Content.ReadAsStringAsync();
 
             var options = new JsonSerializerOptions
@@ -19,9 +19,9 @@ namespace WebUI.ViewComponents.Reviews
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase
             };
 
-            List<Testimonials> testimonials = JsonSerializer.Deserialize<List<Testimonials>>(model, options);
+            Entity.Contact profile = JsonSerializer.Deserialize<Entity.Contact>(model, options);
 
-            return View(testimonials);
+            return View(profile);
         }
     }
 }

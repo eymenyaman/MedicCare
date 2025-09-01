@@ -38,9 +38,9 @@ namespace BLL.Service
             return await experiences.GetAsync();
         }
 
-        public Task<Experiences> GetByIdAsync(int id)
+        public async Task<Experiences> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await experiences.GetByIdAsync(id);
         }
 
         public async Task UpdateAsync()

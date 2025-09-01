@@ -14,12 +14,11 @@ namespace DAL.Concrete.Context
         {
 
         }
-
+        
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<About> Abouts { get; set; }
-        public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Experiences> Experiences { get; set; }
         public DbSet<Testimonials> Testimonials { get; set; }
-
+        public DbSet<Contact> Contacts { get; set; }
     } 
 }

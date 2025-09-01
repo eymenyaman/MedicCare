@@ -49,5 +49,9 @@ namespace DAL.Concrete.EfCore
         {
             return await _context.Set<T>().ToListAsync();
         }
+        public async Task<T> GetByIdAsync(int id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
     }
 }

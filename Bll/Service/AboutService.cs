@@ -30,7 +30,7 @@ namespace BLL.Service
 
         public Task<List<About>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return _aboutDal.GetAllAsync();
         }
 
         public async Task<About> GetAsync()
@@ -38,9 +38,9 @@ namespace BLL.Service
             return await _aboutDal.GetAsync();
         }
 
-        public Task<About> GetByIdAsync(int id)
+        public async Task<About> GetByIdAsync(int Id)
         {
-            throw new NotImplementedException();
+            return await _aboutDal.GetByIdAsync(Id);
         }
 
         public async Task UpdateAsync()
