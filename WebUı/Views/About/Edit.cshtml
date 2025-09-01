@@ -1,0 +1,81 @@
+﻿@model Entity.About
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+<!--begin::App Main-->
+<main class="app-main">
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+        <!--begin::Container-->
+        <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+                <div class="col-sm-6"><h3 class="mb-0">Hakkımızda Düzenle </h3></div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-end">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Hakkımızda Düzenleme İşi</li>
+                    </ol>
+                </div>
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::App Content Header-->
+    <!--begin::App Content-->
+    <div class="app-content">
+        <!--begin::Container-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Title" class="control-label"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Text" class="control-label"></label>
+                            <input asp-for="Text" class="form-control" />
+                            <span asp-validation-for="Text" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Years" class="control-label"></label>
+                            <input asp-for="Years" class="form-control" />
+                            <span asp-validation-for="Years" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="İmage1" class="control-label"></label>
+                            <input asp-for="İmage1" class="form-control" />
+                            <span asp-validation-for="İmage1" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="İmage2" class="control-label"></label>
+                            <input asp-for="İmage2" class="form-control" />
+                            <span asp-validation-for="İmage2" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+
+
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::App Content-->
+</main>
+<!--end::App Main-->
+

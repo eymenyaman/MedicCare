@@ -14,7 +14,7 @@ namespace WebUI
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddHttpClient();
             builder.Services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(
@@ -46,7 +46,7 @@ namespace WebUI
             // Varsayılan route
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Admin}/{action=Index}/{id?}");
 
             app.Run();
         }
