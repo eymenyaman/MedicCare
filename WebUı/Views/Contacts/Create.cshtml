@@ -1,0 +1,89 @@
+﻿@model Entity.Contact
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/_LayoutAdmin.cshtml";
+}
+
+<!--begin::App Main-->
+<main class="app-main">
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+        <!--begin::Container-->
+        <div class="container-fluid">
+            <!--begin::Row-->
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="mb-0">
+                        Contact Kayıt
+                    </h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-end">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Contact Kayıt İşlemleri </li>
+                    </ol>
+                </div>
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::App Content Header-->
+    <!--begin::App Content-->
+    <div class="app-content">
+        <!--begin::Container-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SocialOne" class="control-label"></label>
+                            <input asp-for="SocialOne" class="form-control" />
+                            <span asp-validation-for="SocialOne" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SocialTwo" class="control-label"></label>
+                            <input asp-for="SocialTwo" class="form-control" />
+                            <span asp-validation-for="SocialTwo" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SocialThree" class="control-label"></label>
+                            <input asp-for="SocialThree" class="form-control" />
+                            <span asp-validation-for="SocialThree" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="alert alert-success mt-2">
+                                @ViewBag.Message
+                            </div>
+                        }
+                    </form>
+                </div>
+            </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::App Content-->
+</main>
+<!--end::App Main-->
+
+

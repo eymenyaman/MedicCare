@@ -62,67 +62,122 @@ namespace WebUI.Controllers
             return View(exp);
         }
 
-        
-        // GET: Experience/Edit/5
-        public async Task<IActionResult> Edit(int id)
+
+        // GET: Experience/Edit
+        public async Task<IActionResult> Edit()
         {
-            var response = await _client.GetAsync($"https://localhost:7006/api/Experiences/{id}");
+            var response = await _client.GetAsync("https://localhost:7006/api/Experiences");
+
             if (!response.IsSuccessStatusCode)
-            {
                 return NotFound();
-            }
 
             var result = await response.Content.ReadAsStringAsync();
-            var experience = JsonSerializer.Deserialize<Experiences>(result, new JsonSerializerOptions
+            if (string.IsNullOrWhiteSpace(result))
+                return NotFound();
+
+            // Listeyi deserialize et
+            var expList = JsonSerializer.Deserialize<List<Experiences>>(result, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
 
-            if (experience == null)
+            if (expList == null)
                 return NotFound();
 
-            return View(experience);
+            return View(expList); // View @model List<Experiences> olmalı
         }
 
-        // POST: Experience/Edit/5
+        // POST: Experience/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Experiences model)
+        public async Task<IActionResult> Edit(List<Experiences> model)
         {
-            if (id != model.Id)
-            {
-                return BadRequest();
-            }
+            if (!ModelState.IsValid)
+                return View(model);
 
-            if (ModelState.IsValid)
+            foreach (var exp in model)
             {
-                var json = JsonSerializer.Serialize(model);
+                var json = JsonSerializer.Serialize(exp);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-                var response = await _client.PutAsync($"https://localhost:7006/api/Experiences/{id}", content);
+                // Her deneyimi ayrı ayrı PUT ile gönder
+                var response = await _client.PutAsync($"https://localhost:7006/api/Experiences/{exp.Id}", content);
 
-                if (response.IsSuccessStatusCode)
+                if (!response.IsSuccessStatusCode)
                 {
-                    TempData["SuccessMessage"] = "Tecrübe başarıyla güncellendi.";
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Tecrübe güncellenirken hata oluştu.");
+                    ModelState.AddModelError("", $"Tecrübe (ID: {exp.Id}) güncellenirken hata oluştu.");
+                    return View(model);
                 }
             }
 
-            return View(model);
+            TempData["SuccessMessage"] = "Tüm tecrübeler başarıyla güncellendi.";
+            return RedirectToAction(nameof(Index));
         }
 
-
-        // POST: Experiences/Delete/5
-        [HttpPost, ActionName("Delete")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        // GET: Experience/Delete
+        public async Task<IActionResult> Delete()
         {
-            var response = await _client.DeleteAsync($"https://localhost:7006/api/Experiences/{id}");
-            if (response.IsSuccessStatusCode) return RedirectToAction(nameof(Index));
-            return BadRequest();
+            var response = await _client.GetAsync("https://localhost:7006/api/Experiences");
+
+            if (!response.IsSuccessStatusCode)
+                return NotFound();
+
+            var result = await response.Content.ReadAsStringAsync();
+            if (string.IsNullOrWhiteSpace(result))
+                return NotFound();
+
+            // Listeyi deserialize et
+            var expList = JsonSerializer.Deserialize<List<Experiences>>(result, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            if (expList == null || !expList.Any())
+                return NotFound();
+
+            return View(expList); // View @model List<Experiences> olmalı
         }
+
+        // POST: Experience/Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(List<int> selectedIds)
+        {
+            if (selectedIds == null || !selectedIds.Any())
+            {
+                ModelState.AddModelError("", "Hiçbir tecrübe seçilmedi.");
+                // Tekrar listeyi çek ve göster
+                var response = await _client.GetAsync("https://localhost:7006/api/Experiences");
+                var result = await response.Content.ReadAsStringAsync();
+                var expList = JsonSerializer.Deserialize<List<Experiences>>(result, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+                return View(expList);
+            }
+
+            foreach (var id in selectedIds)
+            {
+                var responseDelete = await _client.DeleteAsync($"https://localhost:7006/api/Experiences/{id}");
+                if (!responseDelete.IsSuccessStatusCode)
+                {
+                    ModelState.AddModelError("", $"Tecrübe (ID: {id}) silinirken hata oluştu.");
+                    // Listeyi tekrar çek ve göster
+                    var response = await _client.GetAsync("https://localhost:7006/api/Experiences");
+                    var result = await response.Content.ReadAsStringAsync();
+                    var expList = JsonSerializer.Deserialize<List<Experiences>>(result, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+                    return View(expList);
+                }
+            }
+
+            TempData["SuccessMessage"] = "Seçilen tüm tecrübeler başarıyla silindi.";
+            return RedirectToAction("Index");
+        }
+
+
+
     }
 }
