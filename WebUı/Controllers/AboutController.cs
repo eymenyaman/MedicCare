@@ -116,7 +116,7 @@ namespace WebUI.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     TempData["SuccessMessage"] = "Hakkımızda başarıyla güncellendi.";
-                    return RedirectToAction(nameof(Edit)); // Tek profil olduğu için tekrar edit sayfasına dön
+                    return RedirectToAction(nameof(Edit)); // Tek About olduğu için tekrar edit sayfasına dön
                 }
                 else
                 {

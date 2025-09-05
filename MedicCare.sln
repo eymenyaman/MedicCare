@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "Bll\BLL.csproj", "{A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2F3E2176-57D6-4B14-A187-54ECCF09C3CB}"
 	ProjectSection(SolutionItems) = preProject
+		EYMEN.txt = EYMEN.txt
+		finishscript.sql = finishscript.sql
 		medic2.sql = medic2.sql
 	EndProjectSection
 EndProject

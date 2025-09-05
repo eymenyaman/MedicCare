@@ -84,7 +84,7 @@ namespace WebUI.Controllers
             if (expList == null)
                 return NotFound();
 
-            return View(expList); // View @model List<Experiences> olmalı
+            return View(expList); 
         }
 
         // POST: Experience/Edit
